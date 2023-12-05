@@ -8,16 +8,16 @@
 
 int main(int argc, char **argv)
 {
-    // if (argc != 2)
-    // {
-    //     printf("Usage: %s <sudoku string>\n", argv[0]);
-    //     return 1;
-    // }
+    if (argc != 2)
+    {
+        printf("Usage: %s <sudoku string>\n", argv[0]);
+        return 1;
+    }
 
     SudokuBoard *board = malloc(sizeof(SudokuBoard));
     init_sudoku(board);
-    load_sudoku(board, "000105000140000670080002400063070010900000003010090520007200080026000035000409000");
-    // load_sudoku(board, argv[1]);
+    // load_sudoku(board, "000105000140000670080002400063070010900000003010090520007200080026000035000409000");
+    load_sudoku(board, argv[1]);
 
     Cell **p_solved_cells = board->solved_cells;
     int solved_counter = board->solved_counter;
