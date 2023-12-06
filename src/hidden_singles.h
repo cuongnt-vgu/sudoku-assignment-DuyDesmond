@@ -12,8 +12,14 @@ typedef struct HiddenSingle_impl
 int find_hidden_single_values(Cell **p_cells, int *hidden_single_values);
 
 // find hidden single cells in a row, in a collumn or in a box
-void find_hidden_single(Cell **p_cells, HiddenSingle *p_hidden_singles,
+void find_hidden_single(Cell **p_cells, HiddenSingle **p_hidden_singles,
                         int *p_counter);
 
 // find hidden single cells in a board, return the number of hidden single cells
 int hidden_singles(SudokuBoard *p_board);
+
+// Helper function to check if a candidate is hidden in the group
+static bool is_hidden_candidate(Cell *cell, int candidate);
+
+// Helper function to count the occurrences of each candidate in the group
+static void count_candidates(Cell **p_cells, int *candidate_count);
