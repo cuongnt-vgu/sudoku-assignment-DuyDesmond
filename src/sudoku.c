@@ -6,6 +6,19 @@
 
 #include "hidden_singles.h"
 
+// void set_cell_value(Cell *cell, int value)
+// {
+//     // Set the given value for the cell and clear other candidates
+//     for (int i = 0; i < BOARD_SIZE; i++)
+//     {
+//         cell->candidates[i] = 0;
+//     }
+
+//     cell->num_candidates = 1;
+//     cell->value = value;
+// }
+
+
 int main(int argc, char **argv)
 {
     // if (argc != 2)
@@ -30,13 +43,18 @@ int main(int argc, char **argv)
             printf("show_possible -> Yes\n");
             continue;
         }
+        solved_counter = hidden_singles(board);
+        if (solved_counter)
+        {
+            printf("hidden_singles %d\n", solved_counter);
+            continue;
+        }
 
-        // solved_counter = hidden_singles(board);
-        // if (solved_counter)
-        // {
-        //     printf("hidden_singles %d\n", solved_counter);
-        //     continue;
-        // }
+        else
+        {
+            printf("No more hidden singles\n");
+            break;
+        }
     }
     print_solution(board);
 
