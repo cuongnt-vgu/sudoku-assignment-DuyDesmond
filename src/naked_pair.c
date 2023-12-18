@@ -1,1 +1,0 @@
-#include "naked_pair.h"
