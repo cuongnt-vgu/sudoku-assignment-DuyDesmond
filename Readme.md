@@ -11,11 +11,37 @@ Build sudoku solver using C programming language.
 
 ## Tasks
 
-Students need to implements the following three algorithms:
+Students need to implements the following three algorithms. There are some functions you may need to use such as:
+
+```
+void set_candidate(Cell *cell, int value);
+void unset_candidate(Cell *cell, int value);
+void set_candidates(Cell *cell, int *candidates, int size);
+int *get_candidates(Cell *cell);
+```
 
 ### Hidden singles
 
 - Read: [Hidden singles](https://www.sudokuwiki.org/Getting_Started) 
+
+- Hint: You try use the [sudoku solver](https://www.sudokuwiki.org/sudoku.htm), pick the example "Gentle" and run step by step. When hidden singles are detected, the message shows the explanation for hidden singles.
+
+![Hidden singles detected](hidden_singles.png)
+
+```
+SINGLE: A1 set to 7, unique in Column and Box
+SINGLE: A4 set to 1, unique in Row
+SINGLE: B8 set to 1, unique in Box
+SINGLE: C3 set to 8, unique in Box
+SINGLE: C9 set to 4, unique in Row and Column and Box
+SINGLE: E1 set to 3, unique in Row
+SINGLE: E9 set to 9, unique in Row
+SINGLE: G1 set to 8, unique in Column
+SINGLE: G6 set to 7, unique in Row and Box
+SINGLE: G7 set to 4, unique in Column and Box
+SINGLE: J9 set to 1, unique in Column
+``` 
+
 
 ### Naked pair/triple
 
@@ -102,12 +128,11 @@ git remote add latest https://github.com/ntcuong2103/sudoku-assignment
 ```
 2. Pull the code
 ```
-git pull --rebase latest main
+git config pull.rebase true
+git pull latest main
 ```
-3. Synchronize changes
-
-Use the button synchronize changes in the bottom left of vscode.
-![Sync button](sync.png)
+3. Push to remote repository
+git push origin --force
 
 ## Compile, run, debug
 
@@ -146,10 +171,48 @@ Menu:
 File > Run > Add configuration...
 Add configuration... --> (gdb) Launch
 ```
-Modify `launch.conf`
+Modify [launch.json](.vscode/launch.json)
 
 ```
             "program": "${workspaceFolder}/sudoku",
             "cwd": "${workspaceFolder}",
             "args": ["000105000140000670080002400063070010900000003010090520007200080026000035000409000"],
 ```
+
+Press F5 for running debugger
+
+### Debug test case with autograder
+
+Modify [launch.json](.vscode/launch.json)
+
+```
+            "program": "${workspaceFolder}/autograder",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "58h8h8j2n00hk805810hgc21o6s4c4k8ka1103h4p0p409d421k0gg14jkhg09bk03s4v0i41c8141343434030hi41c3u1q41bkg18cb824901g05r003f0ogq009g10q8qa4a4ac11a24121419a0hp49co4o2g6",
+                "hidden_singles",
+                "0",
+            ],
+```
+
+where there are three arguments (args) must be provided: board_input, method, and pipe. Pipe could be set to 0, board_input and method can be get from [traces.json](test/traces.json)
+
+
+### Run test cases
+
+- Run all the test cases
+```
+make check
+```
+- Run range of test cases, for example 0 -> 5
+```
+make check-0-5
+```
+- Run single test case, for example 5
+```
+make check-5
+```
+
+### Input and expected output
+
+The input string and expected output string represent the sudoku board with candidates. You can import it directly to the [sudoku solver](https://www.sudokuwiki.org/sudoku.htm) -> "Import a sudoku" to check the step.
