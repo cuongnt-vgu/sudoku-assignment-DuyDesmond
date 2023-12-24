@@ -4,3 +4,5 @@ int naked_triples(SudokuBoard *p_board)
 {
     return 0;
 }
+
+

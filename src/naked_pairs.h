@@ -2,20 +2,23 @@
 
 #include "sudoku.h"
 
-
-
 typedef struct NakedPair_impl {
-    Cell *p_cells[2];
+    Cell *p_cell_1;
+    Cell *p_cell_2;
+    Cell **p_cells;
     int value1;
     int value2;
 } NakedPair;
 
-// Function to find naked pairs in a set of cells
-int find_naked_pairs(Cell **p_cells, NakedPair *naked_pairs);
 
-// Function to apply the constraints of naked pairs to the Sudoku board
-void apply_naked_pair_constraints(Cell **p_cells, NakedPair naked_pair);
+int is_naked_pair(Cell **p_cells, int value1, int value2);
 
-// Function to solve the Sudoku board using naked pairs
+bool is_in_naked_pair_cell(NakedPair *p_array, Cell *p);
+
+int is_naked_cell(Cell *p_cell, int value1, int value2);
+
+int find_naked_pair_values(Cell **p_cells, int *naked_pair_values);
+
+void find_naked_pair(Cell **p_cells, NakedPair *p_naked_pair, int *p_counter);
+
 int naked_pairs(SudokuBoard *p_board);
-

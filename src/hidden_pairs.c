@@ -14,7 +14,6 @@ bool is_hidden_pair(Cell **p_cells, int value1, int value2){
     return (count ==2);
 }
 
-
 bool is_in_cell(Cell *p_cells, int value1, int value2){
     return (is_candidate(p_cells, value1) && is_candidate(p_cells, value2));
 }
@@ -57,12 +56,12 @@ void find_hidden_pair(Cell **p_cells, HiddenPair *p_hidden_pair, int *p_counter)
                 {
                     if (is_in_cell(p_cells[k], hidden_pair_value_array[i], hidden_pair_value_array[j]))
                     {
-                        HiddenPair hidden_pair_object;
-                        hidden_pair_object.value1 = hidden_pair_value_array[i];
-                        hidden_pair_object.value2 = hidden_pair_value_array[j];
-                        hidden_pair_object.p_cells[0] = p_cells[k]; // First cell
-                        hidden_pair_object.p_cells[1] = p_cells[k + 1]; // Second cell
-                        p_hidden_pair[(*p_counter)++] = hidden_pair_object;
+                        HiddenPair hidden_pair_element;
+                        hidden_pair_element.value1 = hidden_pair_value_array[i];
+                        hidden_pair_element.value2 = hidden_pair_value_array[j];
+                        hidden_pair_element.p_cells[0] = p_cells[k]; // First cell
+                        hidden_pair_element.p_cells[1] = p_cells[k + 1]; // Second cell
+                        p_hidden_pair[(*p_counter)++] = hidden_pair_element;
                     }
                 }
             }
@@ -80,9 +79,9 @@ int hidden_pairs(SudokuBoard *p_board)
         find_hidden_pair(p_board->p_rows[i], p_hidden_pair, &p_counter);
         find_hidden_pair(p_board->p_boxes[i], p_hidden_pair, &p_counter);
     }
-    int overlap = p_counter;
+    int repeated = p_counter;
     for (int i = 0; i < p_counter; i++){
-        int not_overlap = 0;
+        int not_repeated = 0;
         Cell **p_cells = p_hidden_pair[i].p_cells;
         int* candidate_array = get_candidates(*p_cells);
         int num_candidates = (*p_cells)->num_candidates;
@@ -90,13 +89,13 @@ int hidden_pairs(SudokuBoard *p_board)
         for (int index = 0; index < num_candidates; index++){
             if ((candidate_array[index] != p_hidden_pair[i].value1) && (candidate_array[index] != p_hidden_pair[i].value2)){
                 unset_candidate(*p_cells, candidate_array[index]);
-                not_overlap = 1;
+                not_repeated = 1;
             }
         }
 
-        overlap -= not_overlap;
+        repeated -= not_repeated;
         free(candidate_array);
     }
-    return (p_counter - overlap)/2;
+    return (p_counter - repeated)/2;
 }
 
