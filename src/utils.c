@@ -150,7 +150,8 @@ bool apply_constraint(Cell **p_cells, int value)
         if (p_cells[i]->num_candidates > 1)
         {
             if (is_candidate(p_cells[i], value))
-            {
+            {   
+                printf("Applying constraint: (%d, %d) - Value: %d\n", p_cells[i]->row_index, p_cells[i]->col_index, value);
                 unset_candidate(p_cells[i], value);
                 ret = true;
             }
