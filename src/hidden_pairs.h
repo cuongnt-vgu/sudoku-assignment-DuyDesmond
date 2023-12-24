@@ -1,10 +1,3 @@
-// #pragma once
-
-// #include "sudoku.h"
-
-// int find_hidden_pairs(Cell **p_cells, HiddenPair *hidden_pairs);
-// void apply_hidden_pair_constraints(Cell **p_cells, HiddenPair hidden_pair);
-// int hidden_pairs(SudokuBoard *p_board);
 #pragma once
 
 #include "sudoku.h"
@@ -22,15 +15,3 @@ bool is_in_cell(Cell *p_cell, int value1, int value2);
 
 int find_hidden_pair_values(Cell **p_cells, int *hidden_pair_values);
 void find_hidden_pair(Cell **p_cells, HiddenPair *p_hidden_pair, int *p_counter);
-
-// int find_and_eliminate_pairs(Cell **unit);
-// int are_pairs(Cell *cell1, Cell *cell2);
-// int eliminate_candidates(Cell **unit, Cell *pair1, Cell *pair2);
-
-// // Function to find hidden pairs in a set of cells
-// int find_hidden_pairs(Cell **p_cells, HiddenPair *hidden_pairs);
-
-// // Function to apply the constraints of hidden pairs to the Sudoku board
-// void apply_hidden_pair_constraints(Cell **p_cells, HiddenPair hidden_pair);
-
-// Function to solve the Sudoku board using hidden pairs
