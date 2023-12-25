@@ -90,6 +90,7 @@ void find_naked_pair(Cell **p_cells, NakedPair *p_naked_pair, int *p_counter)
 
 int naked_pairs(SudokuBoard *p_board)
 {
+    
     NakedPair p_naked_pair[BOARD_SIZE*BOARD_SIZE];
     int p_counter = 0;
     for (int i = 0; i< BOARD_SIZE; i++){
